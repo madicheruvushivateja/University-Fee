@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>University Fee Portal</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1') no-repeat center center fixed;
+      background-size: cover;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: rgba(74, 20, 140, 0.9);
+      color: white;
+      padding: 25px;
+      text-align: center;
+      font-size: 34px;
+      font-weight: bold;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 60px auto;
+      background: rgba(255,255,255,0.95);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0px 8px 20px rgba(0,0,0,0.3);
+    }
+
+    .container h2 {
+      text-align: center;
+      color: #4a148c;
+      margin-bottom: 20px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 14px;
+      margin: 10px 0;
+      border-radius: 10px;
+      border: 2px solid #ccc;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background: #4a148c;
+      color: white;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #6a1b9a;
+    }
+
+    .result {
+      margin-top: 30px;
+      padding: 20px;
+      background: #ede7f6;
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      box-shadow: 0px 6px 15px rgba(0,0,0,0.2);
+    }
+
+    .result img {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      border: 4px solid #4a148c;
+      object-fit: cover;
+    }
+
+    .details {
+      flex: 1;
+    }
+
+    .details p {
+      font-size: 17px;
+      margin: 8px 0;
+    }
+  </style>
+</head>
+<body>
+  <header>University Fee Administration</header>
+
+  <div class="container">
+    <h2>Check Student Fee Details</h2>
+    <input type="text" id="studentName" placeholder="Enter Any Student Name">
+    <button onclick="showFees()">Submit</button>
+
+    <div id="output" class="result" style="display: none;"></div>
+  </div>
+
+  <script>
+    function showFees() {
+      let name = document.getElementById("studentName").value.trim();
+
+      if (name === "") {
+        alert("Please enter a student name!");
+        return;
+      }
+
+      // Generate random values
+      let semesters = ["1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th"];
+      let sem = semesters[Math.floor(Math.random() * semesters.length)];
+
+      let courseFee = Math.floor(Math.random() * 30000) + 35000; // 35k - 65k
+      let hostelFee = Math.floor(Math.random() * 15000) + 15000; // 15k - 30k
+      let pending = Math.floor(Math.random() * 10000); // 0 - 10k
+      let total = courseFee + hostelFee;
+
+      // ✅ Fixed: Random student picture with template string
+      let randomPic = `https://randomuser.me/api/portraits/${Math.random() > 0.5 ? "men" : "women"}/${Math.floor(Math.random()*99)}.jpg`;
+
+      // Show result
+      document.getElementById("output").style.display = "flex";
+      document.getElementById("output").innerHTML = `
+        <img src="${randomPic}" alt="Student Photo">
+        <div class="details">
+          <p><b>Student Name:</b> ${name}</p>
+          <p><b>Semester:</b> ${sem}</p>
+          <p><b>Course Fee:</b> ₹${courseFee}</p>
+          <p><b>Hostel Fee:</b> ₹${hostelFee}</p>
+          <p><b>Pending Fee:</b> ₹${pending}</p>
+          <p><b>Total Fee:</b> ₹${total}</p>
+        </div>
+      `;
+    }
+  </script>
+</body>
+</html>
